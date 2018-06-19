@@ -1,18 +1,33 @@
 var i = 1;
-setInterval(function(){ i++;$('html').scrollTop(250*i); },1000);
-setInterval(function(){ 
+var personelCount = 0;
+setInterval(function () { i++; $('html').scrollTop(250 * i); }, 1000);
+setInterval(function () {
+
+    var count = $('.mn-pymk-list__card').length;
+    if (count > 100) {
+
+        $('.mn-pymk-list__card').each(function (index, value) {
+            count--;
+            if (count > 20) {
+                $(value).find(".pymk-card__close-btn")[0].click();
+            }
+
+        });
+
+    }
 
 
-    $('.mn-pymk-list__card').each(function(index, value) {
-    var text = $(this).find('.mn-person-info__occupation')[0].innerHTML.toLowerCase();
-         if(text.indexOf('developer')>0 || text.indexOf('software')>0)  // job ?
-		 {
-            setTimeout(function() {
-             $(value).find('.button-secondary-small')[0].click();
-            console.log("eklendi " + index);
+    $('.mn-pymk-list__card').each(function (index, value) {
+        var text = $(this).find('.pymk-card__occupation')[0].innerHTML.toLowerCase();
+
+        if (text.indexOf('insan') > 0 || text.indexOf('kaynak') > 0 || text.indexOf('uzman') > 0 || text.indexOf('Mühendi') > 0 || text.indexOf('sorum') > 0 || text.indexOf('bilge') > 0)  // job ?
+        {
+            setTimeout(function () {
+                $(value).find('.button-secondary-small')[0].click();
+                console.log("eklendi " + personelCount++ + " -- " + text);
             }, index * 100);
-         }
-        
-     });
+        }
+
+    });
 }, 7000);
 //https://www.linkedin.com/mynetwork/
